@@ -9,7 +9,7 @@ from webcrawler.exceptions.out_of_limit import OutOfLimit as OutOfLimitException
 
 
 class App:
-    def __int__(self, workers_count: int, data_sources: List[DataSource], storage: Storage, max_tasks: int):
+    def __init__(self, workers_count: int, data_sources: List[DataSource], storage: Storage, max_tasks: int):
         self._threads = []
         self._workers_count = workers_count
         self._queue = TasksQueue(max_tasks)
@@ -19,7 +19,7 @@ class App:
     def run(self):
         for source in self._data_sources:
             try:
-                self._queue.push(Task(priority=0, item=source))
+                self._queue.push(Task(priority=0, data_source=source))
             except OutOfLimitException:
                 break
         self.init_threads(self._workers_count)

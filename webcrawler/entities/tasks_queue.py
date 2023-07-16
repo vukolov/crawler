@@ -1,5 +1,5 @@
 from queue import PriorityQueue
-from task import Task
+from .task import Task
 from ..exceptions.out_of_limit import OutOfLimit as OutOfLimitException
 
 

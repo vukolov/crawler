@@ -12,6 +12,9 @@ class Crawler:
         self._queue = queue
         self._nesting_level = nesting_level
 
+    def set_nesting_level(self, nesting_level: int):
+        self._nesting_level = nesting_level
+
     def crawl(self, data_source: DataSource):
         self.save_content(data_source.get_name(), data_source.get_content())
         self.crawl_links(data_source.get_links())
@@ -23,5 +26,5 @@ class Crawler:
     def crawl_links(self, links: List[DataSource]):
         for link in links:
             self._queue.push(
-                Task(priority=self._nesting_level, item=link)
+                Task(priority=self._nesting_level + 1, data_source=link)
             )

@@ -27,5 +27,6 @@ if __name__ == '__main__':
     app = App(
         workers_count=workers,
         data_sources=[WebSite(args.url)],
-        storage=FileStorage(config['storage_path']))
+        storage=FileStorage(config['storage_path']),
+        max_tasks=config['max_depth'])
     app.run()

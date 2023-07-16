@@ -15,8 +15,9 @@ class Worker(Thread):
         crawler = Crawler(self._storage, self._queue)
         while True:
             task = self._queue.get()
+            crawler.set_nesting_level(task.priority)
             try:
-                crawler.crawl(task.item)
+                crawler.crawl(task.data_source)
             except OutOfLimitException as e:
                 break
             except Exception as e:

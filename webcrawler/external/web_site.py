@@ -1,4 +1,4 @@
-# from __future__ import annotations
+from __future__ import annotations
 from ..entities.data_source import DataSource
 from typing import List
 import requests
@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 
 class WebSite(DataSource):
-    def __int__(self, path):
+    def __init__(self, path):
         self._path = path
         self._content = None
 

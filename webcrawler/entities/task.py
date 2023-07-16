@@ -5,4 +5,4 @@ from typing import Any
 @dataclass(order=True)
 class Task:
     priority: int
-    item: Any = field(compare=False)
+    data_source: Any = field(compare=False)

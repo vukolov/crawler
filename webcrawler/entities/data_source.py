@@ -4,7 +4,7 @@ from typing import List
 
 class DataSource(metaclass=ABCMeta):
     @abstractmethod
-    def __int__(self, path):
+    def __init__(self, path):
         ...
 
     @abstractmethod
