@@ -3,6 +3,7 @@ from webcrawler.external.file_storage import FileStorage
 from webcrawler.external.web_site import WebSite
 import argparse
 from config import config
+import validators
 
 
 if __name__ == '__main__':
@@ -20,6 +21,8 @@ if __name__ == '__main__':
                         help='url to crawl',
                         required=True)
     args = parser.parse_args()
+    if not validators.url(args.url):
+        raise ValueError('Invalid url')
     app = App(
         workers_count=args.workers,
         data_sources=[WebSite(args.url)],

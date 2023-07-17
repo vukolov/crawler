@@ -23,7 +23,7 @@ class CrawlerTest(TestCase):
         )
 
     def test_save_content(self):
-        self._crawler.save_content('test_name', '<html></html>')
+        self._crawler._save_content('test_name', '<html></html>')
         self._storage.save_content.assert_called_once()
 
     def test_crawl_links(self):
@@ -31,6 +31,6 @@ class CrawlerTest(TestCase):
             WebSite('http://example.com'),
             WebSite('https://google.com'),
         ]
-        self._crawler.crawl_links(links)
+        self._crawler._crawl_links(links)
         self._task_q.push.assert_called_with(Task(self._nesting_level + 1, links[0]))
         self._task_q.push.assert_called_with(Task(self._nesting_level + 1, links[1]))

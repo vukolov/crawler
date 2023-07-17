@@ -19,13 +19,14 @@ class Crawler:
         if content:
             self._queue.check_tasks_limit()
             self._queue.increase_processed_task_counter()
-            self.save_content(data_source.get_name(), content)
-            self.crawl_links(data_source.get_links())
+            content_name = data_source.get_name(str(self._nesting_level) + '_')
+            self._save_content(content_name, content)
+            self._crawl_links(data_source.get_links())
 
-    def save_content(self, name: str, content):
+    def _save_content(self, name: str, content):
         self._storage.save_content(content, name)
 
-    def crawl_links(self, links: List[DataSource]):
+    def _crawl_links(self, links: List[DataSource]):
         nesting_level = self._nesting_level + 1
         for link in links:
             self._queue.push(

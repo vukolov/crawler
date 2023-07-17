@@ -2,22 +2,24 @@
 
 
 1. Create docker image
-
+```
 docker build -t crawler .
+```
 
 2. Run the image
-
+```
 docker run -d crawler
-
+```
 ## Start Crawling
 
 1. Enter container:
-
-docker exec -it marketplace:latest /bin/sh
-
+```
+docker exec -it crawler:latest /bin/sh
+```
 2. Run crawler
-
+```
 python3.11 --url="http://www.spiegel.de" --workers=10
+```
 
---workers - is not required parameter
-Parsed sites will be stored in "storage" directory in the project root.
+_**--workers**_ - is not required parameter.
+Parsed sites will be stored in "storage/" directory in the project's root.

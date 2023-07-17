@@ -8,7 +8,7 @@ class DataSource(metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    def get_name(self) -> str:
+    def get_name(self, prefix: str = '') -> str:
         ...
 
     @abstractmethod

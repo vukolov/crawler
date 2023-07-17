@@ -22,8 +22,8 @@ class App:
                 self._queue.push(Task(priority=0, data_source=source))
             except OutOfLimitException:
                 break
-        self.init_threads(self._workers_count)
-        self.start_threads()
+        self._init_threads(self._workers_count)
+        self._start_threads()
         while len(self._threads):
             self._check_threads_status()
             sleep(1)
@@ -33,12 +33,12 @@ class App:
             if not thread.is_alive():
                 self._threads.pop(i)
 
-    def init_threads(self, workers: int):
+    def _init_threads(self, workers: int):
         for thread_id in range(workers):
             worker_thread = Worker(self._queue, self._storage)
             self._threads.append(worker_thread)
 
-    def start_threads(self):
+    def _start_threads(self):
         for thread in self._threads:
             thread.setDaemon(True)
             thread.start()
