@@ -14,13 +14,14 @@ class Worker(Thread):
     def run(self):
         crawler = Crawler(self._storage, self._queue)
         while True:
-            task = self._queue.get()
-            crawler.set_nesting_level(task.priority)
             try:
+                task = self._queue.get()
+                crawler.set_nesting_level(task.priority)
                 crawler.crawl(task.data_source)
             except OutOfLimitException as e:
+                print(str(e))
                 break
             except Exception as e:
-                ...
+                print(str(e))
             finally:
                 self._queue.task_done()

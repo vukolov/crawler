@@ -10,13 +10,17 @@ class TasksQueue:
         self._tasks_counter = 0
 
     def push(self, task: Task):
-        if self._tasks_counter >= self._max_tasks:
-            raise OutOfLimitException('Out of limit')
         self._queue.put(task)
-        self._tasks_counter += 1
 
     def get(self):
         return self._queue.get(block=True)
+
+    def check_tasks_limit(self):
+        if self._tasks_counter >= self._max_tasks:
+            raise OutOfLimitException('Max depth has been reached. Exiting thread...')
+
+    def increase_processed_task_counter(self, amount: int = 1):
+        self._tasks_counter += amount
 
     def task_done(self):
         self._queue.task_done()
