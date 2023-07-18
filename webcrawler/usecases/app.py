@@ -18,10 +18,7 @@ class App:
 
     def run(self):
         for source in self._data_sources:
-            try:
-                self._queue.push(Task(priority=0, data_source=source))
-            except OutOfLimitException:
-                break
+            self._queue.push(Task(priority=0, data_source=source))
         self._init_threads(self._workers_count)
         self._start_threads()
         while len(self._threads):
