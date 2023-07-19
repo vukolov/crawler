@@ -18,7 +18,7 @@ docker exec -it crawler:latest /bin/sh
 ```
 2. Run crawler
 ```
-python3.11 --url="http://www.spiegel.de" --workers=10
+python3.11 main.py --url="http://www.spiegel.de" --workers=10
 ```
 
 _**--workers**_ - is not required parameter.
